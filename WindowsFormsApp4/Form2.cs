@@ -15,6 +15,9 @@ namespace WindowsFormsApp4
         public Form2(int X)
         {
             InitializeComponent();
+
+            var z = pictureBox1.Width;
+            var y = pictureBox1.Height;
             
 
             using (var context = new PokojeEntities2())
@@ -31,28 +34,31 @@ namespace WindowsFormsApp4
                         + "\n\nŁazięka w pokoju:\n" + query1.ŁaziekaWPokoju
                         + "\n\nTelefon: \n" + query1.Telefon;
 
-                    pictureBox1.ImageLocation = ($"Images/{X}.jpg");
+                    try
+                    {
+                        Bitmap img = new Bitmap($"Images/{X}.jpg");
+                        var imageHeight = img.Height;
+                        var imageWidth = img.Width;
+                        this.ClientSize = new Size(imageWidth + 133, imageHeight);
+                        pictureBox1.Image = img;
+                    }
+                    catch
+                    {
+                        Bitmap img = new Bitmap($"Images/0.jpg");
+                        var imageHeight = img.Height;
+                        var imageWidth = img.Width;
+                        this.ClientSize = new Size(imageWidth + 133, imageHeight);
+                        pictureBox1.Image = img;
+                    }
+                    
+
+                    
                 }
                 else
                     label1.Text = "";
                 
             }
 
-            
-
-            //PictureBox picture = new PictureBox
-            //{
-            //    Name = "pictureBox",
-            //    //Size = new Size(1000, 400),
-            //    Location = new Point(150, 100),
-            //    ImageLocation = @"1.jpg",
-            //    SizeMode = PictureBoxSizeMode.CenterImage
-            //};
-            //pictureBox1.Controls.Add(picture);
-
-
         }
-
-
     }
 }

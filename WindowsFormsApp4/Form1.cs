@@ -245,11 +245,9 @@ namespace WindowsFormsApp4
 
         private void label6_DoubleClick(object sender, EventArgs e)
         {
-            //MessageBox.Show(id1.ToString());
             Form2 form2 = new Form2(id1);
             form2.Show();
-
-        }
+}
         private void label7_DoubleClick(object sender, EventArgs e)
         {
             Form2 form2 = new Form2(id2);
