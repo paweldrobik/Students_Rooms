@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PokojeModelStoreContainer" CdmEntityContainer="PokojeEntities1">
+    <EntitySetMapping Name="DanePokojow">
+      <EntityTypeMapping TypeName="PokojeModel.DanePokojow">
+        <MappingFragment StoreEntitySet="DanePokojow">
+          <ScalarProperty Name="NazwaPokoju" ColumnName="NazwaPokoju" />
+          <ScalarProperty Name="Miasto" ColumnName="Miasto" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="LiczbaMiejsc" ColumnName="LiczbaMiejsc" />
+          <ScalarProperty Name="WolneMiejsca" ColumnName="WolneMiejsca" />
+          <ScalarProperty Name="ŁaziekaWPokoju" ColumnName="ŁaziekaWPokoju" />
+          <ScalarProperty Name="IDPokoju" ColumnName="IDPokoju" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

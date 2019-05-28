@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PokojeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Pokoje.dbo.DanePokojow' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DanePokojow">
+          <Key>
+            <PropertyRef Name="NazwaPokoju" />
+            <PropertyRef Name="Miasto" />
+            <PropertyRef Name="Adres" />
+            <PropertyRef Name="Telefon" />
+            <PropertyRef Name="LiczbaMiejsc" />
+            <PropertyRef Name="WolneMiejsca" />
+            <PropertyRef Name="ŁaziekaWPokoju" />
+          </Key>
+          <Property Name="NazwaPokoju" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Miasto" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adres" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Telefon" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LiczbaMiejsc" Type="int" Nullable="false" />
+          <Property Name="WolneMiejsca" Type="int" Nullable="false" />
+          <Property Name="ŁaziekaWPokoju" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="PokojeModelStoreContainer">
+          <EntitySet Name="DanePokojow" EntityType="Self.DanePokojow" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DanePokojow].[NazwaPokoju] AS [NazwaPokoju], 
+    [DanePokojow].[Miasto] AS [Miasto], 
+    [DanePokojow].[Adres] AS [Adres], 
+    [DanePokojow].[Telefon] AS [Telefon], 
+    [DanePokojow].[LiczbaMiejsc] AS [LiczbaMiejsc], 
+    [DanePokojow].[WolneMiejsca] AS [WolneMiejsca], 
+    [DanePokojow].[ŁaziekaWPokoju] AS [ŁaziekaWPokoju]
+    FROM [dbo].[DanePokojow] AS [DanePokojow]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PokojeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DanePokojow">
+          <Key>
+            <PropertyRef Name="NazwaPokoju" />
+            <PropertyRef Name="Miasto" />
+            <PropertyRef Name="Adres" />
+            <PropertyRef Name="Telefon" />
+            <PropertyRef Name="LiczbaMiejsc" />
+            <PropertyRef Name="WolneMiejsca" />
+            <PropertyRef Name="ŁaziekaWPokoju" />
+          </Key>
+          <Property Name="NazwaPokoju" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Miasto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Adres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LiczbaMiejsc" Type="Int32" Nullable="false" />
+          <Property Name="WolneMiejsca" Type="Int32" Nullable="false" />
+          <Property Name="ŁaziekaWPokoju" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="PokojeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DanePokojow" EntityType="Self.DanePokojow" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PokojeModelStoreContainer" CdmEntityContainer="PokojeEntities">
+          <EntitySetMapping Name="DanePokojow">
+            <EntityTypeMapping TypeName="PokojeModel.DanePokojow">
+              <MappingFragment StoreEntitySet="DanePokojow">
+                <ScalarProperty Name="NazwaPokoju" ColumnName="NazwaPokoju" />
+                <ScalarProperty Name="Miasto" ColumnName="Miasto" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="LiczbaMiejsc" ColumnName="LiczbaMiejsc" />
+                <ScalarProperty Name="WolneMiejsca" ColumnName="WolneMiejsca" />
+                <ScalarProperty Name="ŁaziekaWPokoju" ColumnName="ŁaziekaWPokoju" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

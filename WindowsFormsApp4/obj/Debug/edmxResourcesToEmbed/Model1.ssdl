@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PokojeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Pokoje.dbo.DanePokojow' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="DanePokojow">
+    <Key>
+      <PropertyRef Name="NazwaPokoju" />
+      <PropertyRef Name="Miasto" />
+      <PropertyRef Name="Adres" />
+      <PropertyRef Name="Telefon" />
+      <PropertyRef Name="LiczbaMiejsc" />
+      <PropertyRef Name="WolneMiejsca" />
+      <PropertyRef Name="ŁaziekaWPokoju" />
+    </Key>
+    <Property Name="NazwaPokoju" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Miasto" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Adres" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telefon" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LiczbaMiejsc" Type="int" Nullable="false" />
+    <Property Name="WolneMiejsca" Type="int" Nullable="false" />
+    <Property Name="ŁaziekaWPokoju" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="PokojeModelStoreContainer">
+    <EntitySet Name="DanePokojow" EntityType="Self.DanePokojow" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [DanePokojow].[NazwaPokoju] AS [NazwaPokoju], 
+    [DanePokojow].[Miasto] AS [Miasto], 
+    [DanePokojow].[Adres] AS [Adres], 
+    [DanePokojow].[Telefon] AS [Telefon], 
+    [DanePokojow].[LiczbaMiejsc] AS [LiczbaMiejsc], 
+    [DanePokojow].[WolneMiejsca] AS [WolneMiejsca], 
+    [DanePokojow].[ŁaziekaWPokoju] AS [ŁaziekaWPokoju]
+    FROM [dbo].[DanePokojow] AS [DanePokojow]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
