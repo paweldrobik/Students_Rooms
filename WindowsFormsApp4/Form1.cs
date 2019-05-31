@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.Entity;
 
@@ -13,6 +9,7 @@ namespace WindowsFormsApp4
 {
     public partial class Form1 : Form
     {
+        bool searchClick = false;
         int _skipper = 0;
         int _query = 0;
         int id1;
@@ -25,7 +22,51 @@ namespace WindowsFormsApp4
         public Form1()
         {
             InitializeComponent();
-            
+            this.Text = "Students Rooms";
+
+            using (var context = new PokojeEntities2())
+            {
+                
+
+                var query = context.DanePokojow.OrderBy(x => x.NazwaPokoju).LongCount();
+                _query = (int)query;
+
+                var query1 = context.DanePokojow.OrderBy(x => x.NazwaPokoju).FirstOrDefault();
+                label6.Text = $"Nazwa Mieszkania: {query1.NazwaPokoju} \nLiczba pokoi / wolne pokoje: " +
+                        $"{query1.LiczbaMiejsc}/{ query1.WolneMiejsca} \nAneks kuchenny: { query1.ŁaziekaWPokoju}";
+                id1 = query1.IDPokoju.Value;
+
+                var query2 = context.DanePokojow.OrderBy(x => x.NazwaPokoju).Skip(3).FirstOrDefault();
+                label7.Text = $"Nazwa Mieszkania: {query2.NazwaPokoju} \nLiczba pokoi / wolne pokoje: " +
+                        $"{query2.LiczbaMiejsc}/{ query2.WolneMiejsca} \nAneks kuchenny: { query2.ŁaziekaWPokoju}";
+                id2 = query2.IDPokoju.Value;
+
+                var query3 = context.DanePokojow.OrderBy(x => x.NazwaPokoju).Skip(6).FirstOrDefault();
+                label8.Text = $"Nazwa Mieszkania: {query3.NazwaPokoju} \nLiczba pokoi / wolne pokoje: " +
+                        $"{query3.LiczbaMiejsc}/{ query3.WolneMiejsca} \nAneks kuchenny: { query3.ŁaziekaWPokoju}";
+                id3 = query3.IDPokoju.Value;
+
+                var query4 = context.DanePokojow.OrderBy(x => x.NazwaPokoju).Skip(9).FirstOrDefault();
+                label9.Text = $"Nazwa Mieszkania: {query4.NazwaPokoju} \nLiczba pokoi / wolne pokoje: " +
+                        $"{query4.LiczbaMiejsc}/{ query4.WolneMiejsca} \nAneks kuchenny: { query4.ŁaziekaWPokoju}";
+                id4 = query4.IDPokoju.Value;
+
+                var query5 = context.DanePokojow.OrderBy(x => x.NazwaPokoju).Skip(12).FirstOrDefault();
+                label10.Text = $"Nazwa Mieszkania: {query5.NazwaPokoju} \nLiczba pokoi / wolne pokoje: " +
+                        $"{query5.LiczbaMiejsc}/{ query5.WolneMiejsca} \nAneks kuchenny: { query5.ŁaziekaWPokoju}";
+                id5 = query5.IDPokoju.Value;
+
+                var query6 = context.DanePokojow.OrderBy(x => x.NazwaPokoju).Skip(15).FirstOrDefault();
+                label11.Text = $"Nazwa Mieszkania: {query6.NazwaPokoju} \nLiczba pokoi / wolne pokoje: " +
+                        $"{query6.LiczbaMiejsc}/{ query6.WolneMiejsca} \nAneks kuchenny: { query6.ŁaziekaWPokoju}";
+                id6 = query6.IDPokoju.Value;
+
+                var query7 = context.DanePokojow.OrderBy(x => x.NazwaPokoju).Skip(18).FirstOrDefault();
+                label12.Text = $"Nazwa Mieszkania: {query7.NazwaPokoju} \nLiczba pokoi / wolne pokoje: " +
+                        $"{query7.LiczbaMiejsc}/{ query7.WolneMiejsca} \nAneks kuchenny: { query7.ŁaziekaWPokoju}";
+                id7 = query7.IDPokoju.Value;
+            }
+
             comboBox1.Text = "Bielsko-Biała";
             comboBox4.Text = "1";
             comboBox3.Text = "1";
@@ -55,7 +96,7 @@ namespace WindowsFormsApp4
         
         private void button1_Click(object sender, EventArgs e)
         {
-
+            searchClick = true;
             SearchMetchode(0);
             
             
@@ -63,26 +104,32 @@ namespace WindowsFormsApp4
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            if (_skipper >= 7)
+            if (searchClick)
             {
-                SearchMetchode(-7);
-            }
-            else
-            {
-                MessageBox.Show("Jesteś na pierwszej stronie");
+                if (_skipper >= 7)
+                {
+                    SearchMetchode(-7);
+                }
+                else
+                {
+                    MessageBox.Show("Jesteś na pierwszej stronie");
+                }
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if ((_query - 7) > _skipper)
+            if (searchClick)
             {
-                SearchMetchode(7);
-            }
-            else
-            {
-                MessageBox.Show("Brak większej ilości pokoii :(");
+                if ((_query - 7) > _skipper)
+                {
+                    SearchMetchode(7);
+                }
+                else
+                {
+                    MessageBox.Show("Brak większej ilości pokoii");
 
+                }
             }
 
 
@@ -115,8 +162,8 @@ namespace WindowsFormsApp4
                     .OrderBy(x => x.NazwaPokoju).Skip(_skipper).FirstOrDefault();
                 if (query1 != null)
                 {
-                    label6.Text = "Nazwa pokoju: \t " + query1.NazwaPokoju + "\nLiczba miejsc: \t " + query1.LiczbaMiejsc
-                    + "\nŁazięka w pokoju: " + query1.ŁaziekaWPokoju;
+                    label6.Text = $"Nazwa Mieszkania: {query1.NazwaPokoju} \nLiczba pokoi / wolne pokoje: " +
+                        $"{query1.LiczbaMiejsc}/{ query1.WolneMiejsca} \nAneks kuchenny: { query1.ŁaziekaWPokoju}";
                     id1 = query1.IDPokoju.Value;
                 }
                 else
@@ -127,8 +174,8 @@ namespace WindowsFormsApp4
                     .OrderBy(x => x.NazwaPokoju).Skip(_skipper + 1).FirstOrDefault();
                 if (query2 != null)
                 {
-                    label7.Text = "Nazwa pokoju: \t " + query2.NazwaPokoju + "\nLiczba miejsc: \t " + query2.LiczbaMiejsc
-                    + "\nŁazięka w pokoju: " + query2.ŁaziekaWPokoju;
+                    label7.Text = $"Nazwa Mieszkania: {query2.NazwaPokoju} \nLiczba pokoi / wolne pokoje: " +
+                        $"{query2.LiczbaMiejsc}/{ query2.WolneMiejsca} \nAneks kuchenny: { query2.ŁaziekaWPokoju}";
                     id2 = query2.IDPokoju.Value;
                 }
                 else
@@ -139,8 +186,8 @@ namespace WindowsFormsApp4
                     .OrderBy(x => x.NazwaPokoju).Skip(_skipper + 2).FirstOrDefault();
                 if (query3 != null)
                 {
-                    label8.Text = "Nazwa pokoju: \t " + query3.NazwaPokoju + "\nLiczba miejsc: \t " + query3.LiczbaMiejsc
-                        + "\nŁazięka w pokoju: " + query3.ŁaziekaWPokoju;
+                    label8.Text = $"Nazwa Mieszkania: {query3.NazwaPokoju} \nLiczba pokoi / wolne pokoje: " +
+                        $"{query3.LiczbaMiejsc}/{ query3.WolneMiejsca} \nAneks kuchenny: { query3.ŁaziekaWPokoju}";
                     id3 = query3.IDPokoju.Value;
                 }
                 else
@@ -151,8 +198,8 @@ namespace WindowsFormsApp4
                     .OrderBy(x => x.NazwaPokoju).Skip(_skipper + 3).FirstOrDefault();
                 if (query4 != null)
                 {
-                    label9.Text = "Nazwa pokoju: \t " + query4.NazwaPokoju + "\nLiczba miejsc: \t " + query4.LiczbaMiejsc
-                        + "\nŁazięka w pokoju: " + query4.ŁaziekaWPokoju;
+                    label9.Text = $"Nazwa Mieszkania: {query4.NazwaPokoju} \nLiczba pokoi / wolne pokoje: " +
+                        $"{query4.LiczbaMiejsc}/{ query4.WolneMiejsca} \nAneks kuchenny: { query4.ŁaziekaWPokoju}";
                     id4 = query4.IDPokoju.Value;
                 }
                 else
@@ -163,8 +210,8 @@ namespace WindowsFormsApp4
                     .OrderBy(x => x.NazwaPokoju).Skip(_skipper + 4).FirstOrDefault();
                 if (query5 != null)
                 {
-                    label10.Text = "Nazwa pokoju: \t " + query5.NazwaPokoju + "\nLiczba miejsc: \t " + query5.LiczbaMiejsc
-                        + "\nŁazięka w pokoju: " + query5.ŁaziekaWPokoju;
+                    label10.Text = $"Nazwa Mieszkania: {query5.NazwaPokoju} \nLiczba pokoi / wolne pokoje: " +
+                        $"{query5.LiczbaMiejsc}/{ query5.WolneMiejsca} \nAneks kuchenny: { query5.ŁaziekaWPokoju}";
                     id5 = query5.IDPokoju.Value;
                 }
                 else
@@ -175,8 +222,8 @@ namespace WindowsFormsApp4
                     .OrderBy(x => x.NazwaPokoju).Skip(_skipper + 5).FirstOrDefault();
                 if (query6 != null)
                 {
-                    label11.Text = "Nazwa pokoju: \t " + query6.NazwaPokoju + "\nLiczba miejsc: \t " + query6.LiczbaMiejsc
-                        + "\nŁazięka w pokoju: " + query6.ŁaziekaWPokoju;
+                    label11.Text = $"Nazwa Mieszkania: {query6.NazwaPokoju} \nLiczba pokoi / wolne pokoje: " +
+                        $"{query6.LiczbaMiejsc}/{ query6.WolneMiejsca} \nAneks kuchenny: { query6.ŁaziekaWPokoju}";
                     id6 = query6.IDPokoju.Value;
                 }
                 else
@@ -187,8 +234,8 @@ namespace WindowsFormsApp4
                     .OrderBy(x => x.NazwaPokoju).Skip(_skipper + 6).FirstOrDefault();
                 if (query7 != null)
                 {
-                    label12.Text = "Nazwa pokoju: \t " + query7.NazwaPokoju + "\nLiczba miejsc: \t " + query7.LiczbaMiejsc
-                        + "\nŁazięka w pokoju: " + query7.ŁaziekaWPokoju;
+                    label12.Text = $"Nazwa Mieszkania: {query7.NazwaPokoju} \nLiczba pokoi / wolne pokoje: " +
+                        $"{query7.LiczbaMiejsc}/{ query7.WolneMiejsca} \nAneks kuchenny: { query7.ŁaziekaWPokoju}";
                     id7 = query7.IDPokoju.Value;
                 }
                 else
@@ -217,8 +264,8 @@ namespace WindowsFormsApp4
                     .Where(x => x.NazwaPokoju == textBox2.Text).OrderBy(x => x.NazwaPokoju).FirstOrDefault();
                 if (query1 != null)
                 {
-                    label6.Text = "Nazwa pokoju: \t " + query1.NazwaPokoju + "\nLiczba miejsc: \t " + query1.LiczbaMiejsc
-                        + "\nŁazięka w pokoju: " + query1.ŁaziekaWPokoju;
+                    label6.Text = $"Nazwa Mieszkania: {query1.NazwaPokoju} \nLiczba pokoi / wolne pokoje: " +
+                        $"{query1.LiczbaMiejsc}/{ query1.WolneMiejsca} \nAneks kuchenny: { query1.ŁaziekaWPokoju}";
                     id1 = query1.IDPokoju.Value;
                 }
                 else
@@ -228,8 +275,8 @@ namespace WindowsFormsApp4
                     .Where(x => x.NazwaPokoju == textBox2.Text).OrderBy(x => x.NazwaPokoju).Skip(1).FirstOrDefault();
                 if (query2 != null)
                 {
-                    label7.Text = "Nazwa pokoju: \t " + query2.NazwaPokoju + "\nLiczba miejsc: \t " + query2.LiczbaMiejsc
-                        + "\nŁazięka w pokoju: " + query2.ŁaziekaWPokoju;
+                    label7.Text = $"Nazwa Mieszkania: {query2.NazwaPokoju} \nLiczba pokoi / wolne pokoje: " +
+                        $"{query2.LiczbaMiejsc}/{ query2.WolneMiejsca} \nAneks kuchenny: { query2.ŁaziekaWPokoju}";
                     id2 = query2.IDPokoju.Value;
                 }
                 else

@@ -29,10 +29,12 @@ namespace WindowsFormsApp4
                     label1.Text = "Nazwa pokoju:\n" + query1.NazwaPokoju
                         + "\n\nMiasto: \n" + query1.Miasto
                         + "\n\nAdres: \n" + query1.Adres
-                        + "\n\nLiczba miejsc:\n" + query1.LiczbaMiejsc
-                        + "\n\nWolne Miejsca:\n" + query1.WolneMiejsca
-                        + "\n\nŁazięka w pokoju:\n" + query1.ŁaziekaWPokoju
+                        + "\n\nLiczba pokoi:\n" + query1.LiczbaMiejsc
+                        + "\n\nWolne pokoje:\n" + query1.WolneMiejsca
+                        + "\n\nAneks kuchenny:\n" + query1.ŁaziekaWPokoju
                         + "\n\nTelefon: \n" + query1.Telefon;
+
+                    this.Text = query1.NazwaPokoju;
 
                     try
                     {
